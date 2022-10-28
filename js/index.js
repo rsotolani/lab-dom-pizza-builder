@@ -44,22 +44,73 @@ function renderPepperoni() {
 
 function renderMushrooms() {
   // Iteration 1: set the visibility of `<section class="mushroom">`
+  document.querySelectorAll('.mushroom').forEach((oneMushroom) => {
+    if (state.mushrooms) {
+      oneMushroom.style.visibility = 'visible';
+    } else {
+      oneMushroom.style.visibility = 'hidden';
+    }
+  });
 }
 
 function renderGreenPeppers() {
   // Iteration 1: set the visibility of `<section class="green-pepper">`
+  document.querySelectorAll('.green-pepper').forEach((oneGreenPepper) => {
+    if (state.greenPeppers) {
+      oneGreenPepper.style.visibility = 'visible';
+    } else {
+      oneGreenPepper.style.visibility = 'hidden';
+    }
+  });
 }
 
 function renderWhiteSauce() {
   // Iteration 2: add/remove the class "sauce-white" of `<section class="sauce">`
+  const whiteSouce = document.querySelector('.sauce');
+  //console.log(whiteSouce.classList.value.match(/sauce-white/g));
+
+  // ----> ta certa essa logica??
+  if (whiteSouce.classList.value.match(/sauce-white/g)){
+    whiteSouce.setAttribute('class','sauce');
+  } else {
+    whiteSouce.setAttribute('class','sauce sauce-white');
+  }
+  
 }
 
 function renderGlutenFreeCrust() {
   // Iteration 2: add/remove the class "crust-gluten-free" of `<section class="crust">`
+  const crust = document.querySelector('.crust');
+  if (crust.classList.value.match(/crust-gluten-free/g)){
+    crust.setAttribute('class','crust');
+  } else {
+    crust.setAttribute('class','crust crust-gluten-free');
+  }
 }
 
 function renderButtons() {
   // Iteration 3: add/remove the class "active" of each `<button class="btn">`
+  const btn = document.querySelectorAll('.btn');
+  console.log(btn);
+  if (state.pepperoni) {
+    
+  }
+
+  if (state[index] !== button.classList.contains('active')) {
+    if (state[index]) {
+      button.classList.add('active');
+    } else {
+      button.classList.remove('active');
+    }
+  }
+
+  //console.log(button.classList.value.match(/active/g));
+
+  // if (button.classList.value.match(/active/g)){
+  //   //crust.setAttribute('class','crust');
+  // } else {
+  //   //crust.setAttribute('class','crust crust-gluten-free');
+  // }
 }
 
 function renderPrice() {
@@ -69,15 +120,39 @@ function renderPrice() {
 renderEverything();
 
 // Iteration 1: Example of a click event listener on `<button class="btn btn-pepperoni">`
-document.querySelector('.btn.btn-pepperoni').addEventListener('click', function () {
+document.querySelector('.btn-pepperoni').addEventListener('click', function () {
   state.pepperoni = !state.pepperoni;
-  renderEverything();
+  //renderEverything(); ---> tive que comentar pq ao clicar em outro botao estava alterando a class de outros ingredientes
+  renderPepperoni();
+  renderButtons();
 });
 
 // Iteration 1: Add click event listener on `<button class="btn btn-mushrooms">`
+document.querySelector('.btn-mushrooms').addEventListener('click', () => {
+  state.mushrooms = !state.mushrooms;
+  //renderEverything(); ---> tive que comentar pq ao clicar em outro botao estava alterando a class de outros ingredientes
+  renderMushrooms();
+});
 
 // Iteration 1: Add click event listener on `<button class="btn btn-green-peppers">`
+document.querySelector('.btn-green-peppers').addEventListener('click', () => {
+  state.greenPeppers = !state.greenPeppers;
+  //renderEverything(); ---> tive que comentar pq ao clicar em outro botao estava alterando a class de outros ingredientes
+  renderGreenPeppers();
+});
 
 // Iteration 2: Add click event listener on `<button class="btn btn-sauce">`
+document.querySelector('.btn-sauce').addEventListener('click', () => {
+  state.whiteSauce = !state.whiteSauce;
+  renderWhiteSauce();
+  //renderEverything(); ---> tive que comentar pq ao clicar em outro botao estava alterando a class de outros ingredientes
+
+});
 
 // Iteration 2: Add click event listener on `<button class="btn btn-crust">`
+document.querySelector('.btn-crust').addEventListener('click', () => {
+  state.glutenFreeCrust = !state.glutenFreeCrust;
+  //renderEverything();  ---> tive que comentar pq ao clicar em outro botao estava alterando a class de outros ingredientes
+
+  renderGlutenFreeCrust();
+});
